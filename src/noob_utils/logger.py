@@ -1,9 +1,13 @@
 import logging
 import sys
+from typing import Any
 
 from colorama import init
 from colorama import Fore, Back
 
+
+LoggerLevel = Any
+Logger = Any
 
 init(autoreset=True)
 
@@ -28,10 +32,20 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(log_fmt, datefmt='%Y-%m-%d %H:%M:%S')
         return formatter.format(record)
 
-def get_logger(name, level=logging.INFO):
+def get_logger(name:str, level:LoggerLevel=logging.INFO) -> Logger:
+    """Get the customized logger with time [level] [name] message format,
+    where the time, level and name are colored.
+
+    Args:
+        name (str): The name of the logger, use __name__ as default
+        level (LoggerLevel, optional): The logging level. Defaults to logging.INFO.
+
+    Returns:
+        Logger: The customized logger.
+    """
     logger = logging.getLogger(name)
     handler = logging.StreamHandler(sys.stdout)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(level)
     formatter = CustomFormatter()
     handler.setFormatter(formatter)
     logger.addHandler(handler)
