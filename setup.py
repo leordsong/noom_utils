@@ -9,7 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="noob_utils",
-    version="0.0.1",
+    version="0.0.2",
     author="Leo Song",
     author_email="bjecdexlyb@gmail.com",
     description="Common Python Utils",
